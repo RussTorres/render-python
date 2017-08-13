@@ -162,7 +162,9 @@ def load_leaf_json(d):
         TranslationModel.className: lambda x: TranslationModel(json=x),
         RigidModel.className: lambda x: RigidModel(json=x),
         SimilarityModel.className: lambda x: SimilarityModel(json=x),
-        NonLinearTransform.className: lambda x: NonLinearTransform(json=x)}
+        NonLinearTransform.className: lambda x: NonLinearTransform(json=x),
+        LensCorrection.className: lambda x: LensCorrection(json=x),
+        NonLinearCoordinateTransform.className: lambda x: NonLinearCoordinateTransform(json=x)}
 
     tform_type = d.get('type', 'leaf')
     if tform_type != 'leaf':
@@ -1371,9 +1373,11 @@ def estimate_dstpts(transformlist, src=None):
     return dstpts
 
 
-class NonLinearTransform(Transform):
+    
+
+class NonLinearCoordinateTransform(Transform):
     """
-    render-python class that implements the mpicbg.trakem2.transform.nonLinearTransform class
+    render-python class that implements the mpicbg.trakem2.transform.NonLinearCoordinateTransform class
     
     Parameters
     ----------
@@ -1390,10 +1394,7 @@ class NonLinearTransform(Transform):
 
     """
 
-    className = 'mpicbg.trakem2.transform.nonLinearTransform'
-
-
-
+    className = 'mpicbg.trakem2.transform.NonLinearCoordinateTransform'
 
     def __init__(self, dataString=None, json=None,transformId=None):
         if json is not None:
@@ -1493,6 +1494,16 @@ class NonLinearTransform(Transform):
         dimstring = '{} {}'.format(self.height, self.width)
         return '{} {} {} {} {} '.format(
             shapestring, betastring, meanstring, varstring, dimstring)
+
+class NonLinearTransform(NonLinearTransform):
+    className = 'mpicbg.trakem2.transform.nonLinearTransform'
+
+class LensCorrection(NonLinearCoordinateTransform):
+    """
+    a placeholder for the lenscorrection transform, same as NonLinearTransform
+    for now
+    """
+    className = 'lenscorrection.NonLinearTransform'
 
 
 def estimate_transformsum(transformlist, src=None, order=2):
