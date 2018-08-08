@@ -1,7 +1,7 @@
 from .transform import Transform, logger
 from .AffineModels import AffineModel
 import numpy as np
-from ..errors import ConversionError, EstimationError, RenderError
+from renderapi.errors import ConversionError, EstimationError, RenderError
 
 try:
     from scipy.linalg import svd, LinAlgError

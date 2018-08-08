@@ -1,6 +1,6 @@
 from .transform import Transform
 import numpy as np
-from ..errors import ConversionError, EstimationError
+from renderapi.errors import ConversionError, EstimationError
 
 try:
     from scipy.linalg import svd, LinAlgError

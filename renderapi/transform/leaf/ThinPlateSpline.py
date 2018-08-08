@@ -1,6 +1,6 @@
 import numpy as np
-from ..errors import RenderError
-from ..utils import encodeBase64, decodeBase64
+from renderapi.errors import RenderError
+from renderapi.utils import encodeBase64, decodeBase64
 from .transform import Transform
 
 
